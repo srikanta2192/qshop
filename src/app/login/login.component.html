@@ -1,0 +1,57 @@
+<p>login works!</p>
+
+<div class="login-page">
+    <mat-grid-list cols="3" rowHeight="300px">
+        <mat-grid-tile></mat-grid-tile>
+        <mat-grid-tile [rowspan]="2">
+            <mat-card class="login-card">
+                <div *ngIf="!signUp; else signUpBlock">
+                    <h3>Login</h3>
+                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+                        <div class="form-field">
+                            <mat-form-field>
+                                <input matInput placeholder="Name" formControlName="name">
+                            </mat-form-field>
+                        </div>
+                        <div class="form-field">
+                            <mat-form-field>
+                                <input matInput placeholder="Password" type="password" formControlName="password">
+                            </mat-form-field>
+                        </div>
+                        <button type="submit" [disabled]="!loginForm.valid" mat-button>Submit</button>
+                        <button type="reset" (click)="toggleSignUp(1)" mat-button>Sign Up</button>
+
+                    </form>
+                </div>
+            </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile></mat-grid-tile>
+    </mat-grid-list>
+</div>
+
+<ng-template #signUpBlock>
+    <h3>Sign Up</h3>
+    <form [formGroup]="signUpForm" (ngSubmit)="onSignUpSubmit()">
+
+        <div class="form-field">
+            <mat-form-field>
+                <input matInput placeholder="Name" formControlName="name">
+            </mat-form-field>
+        </div>
+        <div class="form-field">
+            <mat-form-field>
+                <input matInput placeholder="Password" type="password" formControlName="password">
+            </mat-form-field>
+        </div>
+        <div class="form-field">
+            <mat-form-field>
+                <input matInput placeholder="Confirm Password" type="password" formControlName="confirmPassword">
+            </mat-form-field>
+        </div>
+        <button type="submit" [disabled]="!signUpForm.valid" mat-button>Submit</button>
+        <button type="reset" (click)="toggleSignUp(0)" mat-button>Back to login</button>
+
+    </form>
+
+</ng-template>
