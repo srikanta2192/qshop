@@ -27,7 +27,7 @@ export class CreateAddressComponent implements OnInit {
   onCreateAddressSubmit = () => {
     this.isAddressSubmitted = true;
     this.emitAddressDetails.emit(
-      this.createAddressForm.value,
+      this.createAddressForm,
     )
   }
 }

@@ -1,26 +1,27 @@
+<!-- <div *ngIf="admin"> -->
 <h4>Create Shop</h4>
 <form [formGroup]="createShopForm" (ngSubmit)="onCreateShopSubmit()">
-    <!-- <button *ngIf="!isCreateAddress" (click)="onCreateSubUser()" mat-button>Create shop</button> -->
     <button type="none" (click)="onAddNewAddress()" mat-button>Add address</button>
     <div>
+        <mat-form-field>
+            <input matInput placeholder="Shop Name" formControlName="name">
+        </mat-form-field>
         <mat-form-field>
             <input matInput placeholder="Email" formControlName="email">
         </mat-form-field>
     </div>
+   
     <div *ngFor="let address of address.value;let i=index">
         <app-create-address (emitAddressDetails)="addressCreateEmit($event)"></app-create-address>
     </div>
+    <button *ngIf="!isCreateSubUser" (click)="onCreateSubUser()" mat-button>Create Sub User</button>
 
-    <!-- <button type="submit" [disabled]="!createShopForm.valid" mat-button>Create</button> -->
-    <!-- <button type="reset" mat-button>Reset</button> -->
+    <span *ngIf="isCreateSubUser">
+        <button (click)="onAddSubUser()" mat-button>Add Sub User</button>
+
+        <div *ngFor="let user of subUsers.value">
+            <app-create-sub-user (emitUserDetails)="subUserCreateEmit($event)"></app-create-sub-user>
+        </div>
+    </span>
+    <button type="submit" [disabled]="!createShopForm.valid" mat-button>Create Shop</button>
 </form>
-
-<button *ngIf="!isCreateSubUser" (click)="onCreateSubUser()" mat-button>Create Sub User</button>
-
-<span *ngIf="isCreateSubUser">
-    <button (click)="onAddSubUser()" mat-button>Add Sub User</button>
-
-    <div *ngFor="let user of subUsers.value">
-        <app-create-sub-user (emitUserDetails)="subUserCreateEmit($event)"></app-create-sub-user>
-    </div>
-</span>

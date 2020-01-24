@@ -12,6 +12,7 @@ export class CreateSubUserComponent implements OnInit {
   @Output() emitUserDetails = new EventEmitter<any>();
 
   createSubUserForm = this.fb.group({
+    name: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(4)]],
   });
@@ -23,17 +24,16 @@ export class CreateSubUserComponent implements OnInit {
   }
 
   onCreateSubUserSubmit = () => {
-    const { email, password } = this.createSubUserForm.value
+    const { name, email, password } = this.createSubUserForm.value
     const userData = {
-      email, password, admin: false
+      name, email, password, admin: false
     }
     this.adminService.createUser(userData).subscribe(data => {
       console.log(data)
       if (data['create']) {
         this.userCreated = true;
-        this.emitUserDetails.emit({ email })
+        this.emitUserDetails.emit(this.createSubUserForm)
       }
-
     })
   }
 

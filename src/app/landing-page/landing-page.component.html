@@ -1,0 +1,14 @@
+<mat-grid-list cols="2" >
+    <mat-grid-tile>
+        <div>
+            show the existing shops address and with current sub users
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <button *ngIf="!isCreateShop" (click)="onCreateShop(1)" mat-button>Create Shop</button>
+        <div *ngIf="isCreateShop">
+            <app-create-shop></app-create-shop>
+        </div>
+    </mat-grid-tile>
+
+</mat-grid-list>
