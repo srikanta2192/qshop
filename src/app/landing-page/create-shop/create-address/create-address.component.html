@@ -1,0 +1,28 @@
+<span *ngIf="!isAddressSubmitted; else addressDetails">
+    <form [formGroup]="createAddressForm" (ngSubmit)="onCreateAddressSubmit()">
+
+        <div>
+            <mat-form-field>
+                <input matInput placeholder="Plot No" formControlName="plot">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Locality" type="text" formControlName="locality">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Pincode" type="text" formControlName="pincode">
+            </mat-form-field>
+        </div>
+        <button type="submit" [disabled]="!createAddressForm.valid" mat-button>Submit address</button>
+
+    </form>
+</span>
+
+<ng-template #addressDetails>
+    <div>
+        <h4>Address {{index }} is</h4>
+        <p> Plot: {{createAddressForm.value.plot}}</p>
+
+        <p> Locality :{{createAddressForm.value.locality}}</p>
+        <p> Pincode :{{createAddressForm.value.pincode}}</p>
+    </div>
+</ng-template>

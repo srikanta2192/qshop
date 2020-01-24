@@ -1,0 +1,23 @@
+<span *ngIf="!userCreated; else userDetails">
+    <form [formGroup]="createSubUserForm" (ngSubmit)="onCreateSubUserSubmit()">
+        <h4>Create Sub User</h4>
+        <div class="form-field">
+            <mat-form-field>
+                <input matInput placeholder="Email" formControlName="email">
+            </mat-form-field>
+        </div>
+        <div class="form-field">
+            <mat-form-field>
+                <input matInput placeholder="Password" type="password" formControlName="password">
+            </mat-form-field>
+        </div>
+        <button type="submit" [disabled]="!createSubUserForm.valid" mat-button>Create sub user</button>
+        <button type="reset" mat-button>Cancel</button>
+
+    </form>
+</span>
+<ng-template #userDetails>
+    <p>
+        Email: {{createSubUserForm.value.email}}
+    </p>
+</ng-template>
