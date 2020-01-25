@@ -1,7 +1,21 @@
-<mat-grid-list cols="2" >
-    <mat-grid-tile>
+<div style="float: right;">
+    <button (click)="onLogOut()" mat-button>Logout</button>
+
+</div>
+<mat-grid-list cols="2" rowHeight="300px">
+    <mat-grid-tile class="shop-list-tile">
         <div>
-            show the existing shops address and with current sub users
+            <h3 mat-subheader>Shops</h3>
+            <mat-card>
+                <span *ngIf="shopDetails.length > 0; else noShopBlock">
+                    <mat-list role="list">
+                        <mat-list-item (click)="onShopSelect(shop)" *ngFor="let shop of shopDetails" role="listitem">
+                            Name: {{shop.name}} ,
+                            Email :
+                            {{shop.email}}</mat-list-item>
+                    </mat-list>
+                </span>
+            </mat-card>
         </div>
     </mat-grid-tile>
     <mat-grid-tile>
@@ -10,5 +24,26 @@
             <app-create-shop></app-create-shop>
         </div>
     </mat-grid-tile>
+    <mat-grid-tile class="selected-shop">
+        <div *ngIf="isShopSelected">
+            <mat-card>
+                <mat-card-content>
+                    <h4>Shop details</h4>
+                    <p>Name: {{selectedShopData.name}}</p>
+                    <p>Email: {{selectedShopData.email}}</p>
+                    <p *ngFor="let user of selectedShopData.subUsers">User name: {{user.name}}, Email: {{user.email}}
+                    </p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </mat-grid-tile>
 
 </mat-grid-list>
+
+
+<ng-template #noShopBlock>
+    <mat-card>
+        No shops yet!
+    </mat-card>
+
+</ng-template>
