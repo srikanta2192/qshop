@@ -41,6 +41,13 @@ export class LandingPageComponent implements OnInit {
 
   onShopSelect = (shop) => {
     this.isShopSelected = true;
-    this.selectedShopData = shop
+    this.selectedShopData = shop;
+  }
+
+  onLogOut = () => {
+    localStorage.removeItem('login');
+    localStorage.removeItem('admin');
+    localStorage.removeItem('email');
+    this.router.navigateByUrl('/login');
   }
 }
